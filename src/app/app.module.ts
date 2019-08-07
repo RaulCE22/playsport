@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatDialogModule, MatProgressSpinnerModule, MatSnackBarModule, MatToolbarModule, MatIconModule } from '@angular/material';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatDialogModule, MatProgressSpinnerModule, MatSnackBarModule, MatToolbarModule, MatIconModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
@@ -11,6 +11,8 @@ import { AuthNickNameComponent } from './auth/auth-nickname.component';
 import { LoadingComponent } from './loading/loading.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './home/header/header.component';
+import { EventComponent } from './home/event/event.component';
+import { AuthInterceptor } from './auth/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { HeaderComponent } from './home/header/header.component';
     AuthNickNameComponent,
     LoadingComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    EventComponent
   ],
   imports: [
     BrowserModule,
@@ -37,14 +40,18 @@ import { HeaderComponent } from './home/header/header.component';
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
   entryComponents: [
     AuthNickNameComponent,
-    LoadingComponent
+    LoadingComponent,
+    EventComponent
   ]
 })
 export class AppModule { }

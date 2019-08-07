@@ -16,7 +16,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router, private loadingService: LoadingService) {}
 
   getToken() {
-    return this.token;
+    return localStorage.getItem('token');
   }
   signup(email: string, password: string, nickname: string) {
     this.loadingService.show();
