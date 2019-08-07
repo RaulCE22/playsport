@@ -1,0 +1,9 @@
+:host {
+  display: inline-block;
+}
+h4 {
+  color: white;
+}
+.spinner {
+  margin: 0 auto 1rem auto;
+}

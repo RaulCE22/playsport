@@ -1,0 +1,12 @@
+.login  {
+  margin: 4rem auto;
+  max-width: 30rem;
+  text-align: center;
+}
+.login form {
+  display: flex;
+  flex-direction: column;
+}
+.login button {
+  margin: 1rem 0 0 0
+}

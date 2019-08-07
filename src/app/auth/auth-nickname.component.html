@@ -1,0 +1,9 @@
+<form (submit)="onNickName()" [formGroup]="form">
+  <div mat-dialog-content>
+    <h2>Welcome</h2>
+    <mat-form-field>
+      <input matInput formControlName="nickname" placeholder="First, add your nickname"/>
+    </mat-form-field>
+  </div>
+    <button mat-button [disabled]="form.invalid" value="submit">Ok</button>
+</form>
