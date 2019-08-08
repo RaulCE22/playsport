@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { EventService } from './event.service';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-event',
@@ -11,7 +11,9 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 export class EventComponent implements OnInit {
 
   form: FormGroup;
-  constructor(public dialog: MatDialogRef<EventComponent>, private eventService: EventService) { }
+  eventId: string;
+  userCreatorId: string;
+  constructor(private eventService: EventService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -20,18 +22,28 @@ export class EventComponent implements OnInit {
       date: new FormControl({value: new Date(), disabled: true}, [Validators.required]),
       numPeople: new FormControl(1, [Validators.required, Validators.min(1)]),
     });
+    this.eventId = this.activatedRoute.snapshot.paramMap.get('id');
+    if ( this.eventId ) {
+      this.eventService.getEvent(this.eventId)
+      .subscribe(result => {
+        this.form.patchValue({
+          title: result.event.title,
+          place: result.event.place,
+          date: result.event.date,
+          numPeople: result.event.numPeople
+        });
+        this.userCreatorId = result.event.creator;
+        console.log(result);
+      });
+    }
   }
   onSave() {
     const eventDataToSave = this.form.getRawValue();
     console.log(eventDataToSave);
     this.eventService.save(eventDataToSave.title, eventDataToSave.place, eventDataToSave.date, eventDataToSave.numPeople)
     .subscribe( () => {
-      this.dialog.close();
+      this.router.navigate(['home']);
     });
   }
-  onCancel() {
-      this.dialog.close();
-  }
-
 
 }

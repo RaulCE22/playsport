@@ -1,0 +1,11 @@
+mat-expansion-panel-header {
+  padding-left: 0;
+  padding-right: 0.5rem;
+}
+.participants {
+  border: 0;
+  box-shadow: none;
+}
+.participants span {
+  padding: 0.2rem 0.5rem;
+}

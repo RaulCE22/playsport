@@ -6,5 +6,6 @@ const router = express.Router();
 
 router.post("/save", checkAuth,  EventController.create);
 router.get("/getMyEventsCreated", checkAuth,  EventController.getMyEventsCreated);
+router.get("/get/:id", checkAuth,  EventController.getEvent);
 
 module.exports = router;

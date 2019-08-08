@@ -1,0 +1,23 @@
+<mat-accordion class="example-headers-align">
+    <mat-expansion-panel class="participants" (opened)="onOpen()">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            <mat-icon>account_circle</mat-icon>
+            <span>
+              Participants
+            </span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list role="list">
+          <mat-list-item *ngFor="let participant of participants$ | async">
+            <mat-icon>person</mat-icon>
+            {{ participant.userNickName }}
+            <mat-divider></mat-divider>
+          </mat-list-item>
+        </mat-list>
+      <mat-action-row>
+        <button mat-button color="primary" type="button" (click)="onJoin()">Join</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+  </mat-accordion>

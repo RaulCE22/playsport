@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button *ngIf="!isHome" mat-icon-button (click)="onBack()">
+      <mat-icon class="example-icon" aria-hidden="false">keyboard_backspace</mat-icon>
+    </button>
+    <span>{{ title }}</span>
+    <span class="example-spacer"></span>
+    <button *ngIf="isHome" mat-icon-button (click)="onLogout()">
+      <mat-icon class="example-icon" aria-hidden="false">exit_to_app</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

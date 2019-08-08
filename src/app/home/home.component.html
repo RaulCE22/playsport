@@ -1,8 +1,8 @@
-<app-header></app-header>
+<app-header [isHome]="true" title="Play Sport"></app-header>
 <mat-list>
   <h3 mat-subheader>Events</h3>
   <mat-divider></mat-divider>
-  <mat-list-item *ngFor="let event of myEventsCreated$ | async">
+  <mat-list-item *ngFor="let event of myEventsCreated$ | async" (click)="onEventClick(event._id)">
     <h3 matLine>{{ event.title }}</h3>
     <p matLine>
       <span> {{ event.place }} </span>

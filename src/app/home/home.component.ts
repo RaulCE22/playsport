@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EventComponent } from './event/event.component';
-import { MatDialog } from '@angular/material';
-import { EventService } from './event/event.service';
+import { EventService } from '../event/event.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,17 +11,16 @@ import { Observable } from 'rxjs';
 export class HomeComponent implements OnInit {
 
   myEventsCreated$: Observable<EventData[]>;
-  constructor(public dialog: MatDialog, private eventService: EventService) { }
+  constructor(private eventService: EventService, private router: Router) { }
 
   ngOnInit() {
     this.myEventsCreated$ = this.eventService.myEventsCreated$();
     this.eventService.getMyEventsCreated();
   }
   onNewEvent() {
-    const dialogRef = this.dialog.open(EventComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
-    });
+    this.router.navigate(['event']);
+  }
+  onEventClick(eventId: string) {
+    this.router.navigate(['event/' + eventId]);
   }
 }

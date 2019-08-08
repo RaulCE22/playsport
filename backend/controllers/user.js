@@ -36,7 +36,7 @@ exports.login = (req, res, next) => {
         return res.status(401).json({ message: "Auth failed" });
       }
       const token = jwt.sign(
-        { userId:fetchedUser._id, userNickName: fetchedUser.nickName},
+        { userId:fetchedUser._id, userNickName: fetchedUser.nickname},
         process.env.JWT_KEY,
         { expiresIn: "1h" }
       );

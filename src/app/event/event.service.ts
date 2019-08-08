@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LoadingService } from '../../loading/loading.service';
+import { LoadingService } from '../loading/loading.service';
 
-import { environment } from '../../../environments/environment';
+import { environment } from '../../environments/environment';
 import { BehaviorSubject, of, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
@@ -20,6 +20,7 @@ export class EventService {
   save(title: string, place: string, date: Date, numPeople: number) {
     this.loadingService.show();
     const eventData: EventData = {
+      _id: null,
       creator: null,
       title: title,
       place: place,
@@ -45,5 +46,8 @@ export class EventService {
         this.myEventsCreated.next(result.events);
       });
   }
+  getEvent(eventId: string) {
+    return this.http.get<{ message: string, event: EventData }>(BACKEND_URL + '/get/' + eventId)
+   }
 
 }

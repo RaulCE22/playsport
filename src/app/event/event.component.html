@@ -1,0 +1,42 @@
+<app-header [isHome]="false" title="Event"></app-header>
+<form (submit)="onSave()" [formGroup]="form">
+  <mat-form-field>
+    <input
+      matInput
+      formControlName="title"
+      placeholder="Titulo ej) Football mach"
+      type="text"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="place" placeholder="Place" type="text" />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      type="number"
+      placeholder="Num people"
+      formControlName="numPeople"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      [matDatepicker]="eventDate"
+      placeholder="Date"
+      formControlName="date"
+    />
+    <mat-datepicker-toggle matSuffix [for]="eventDate"></mat-datepicker-toggle>
+    <mat-datepicker #eventDate disabled="false"></mat-datepicker>
+  </mat-form-field>
+  <app-participant *ngIf="eventId && userCreatorId" [eventId]="eventId" [userCreatorId]="userCreatorId"></app-participant>
+  <button
+    mat-raised-button
+    type="submit"
+    class="buttonSubmit"
+    color="primary"
+    [disabled]="form.invalid"
+  >
+    Save
+  </button>
+</form>

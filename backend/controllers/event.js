@@ -27,3 +27,12 @@ exports.getMyEventsCreated = (req, res, next) => {
       res.status(200).json({ message: "All mi events", events: events });
     });
 };
+exports.getEvent = (req, res, next) => {
+  Event.findById(req.params.id)
+    .then(event => {
+      res.status(200).json({ message: "Event with id: " + event._id, event: event });
+    })
+    .catch( err => {
+      res.status(404).json( { message: "Event not found!"})
+    })
+};

@@ -6,3 +6,6 @@ simple-snack-bar {
   display: block !important;
   text-align: center !important;
 }
+button mat-icon {
+  padding: 0 !important;
+}

@@ -3,16 +3,17 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatDialogModule, MatProgressSpinnerModule, MatSnackBarModule, MatToolbarModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, MatListModule, MatBadgeModule } from '@angular/material';
+import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatDialogModule, MatProgressSpinnerModule, MatSnackBarModule, MatToolbarModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, MatListModule, MatBadgeModule, MatExpansionModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthNickNameComponent } from './auth/auth-nickname.component';
 import { LoadingComponent } from './loading/loading.component';
 import { HomeComponent } from './home/home.component';
-import { HeaderComponent } from './home/header/header.component';
-import { EventComponent } from './home/event/event.component';
+import { HeaderComponent } from './header/header.component';
+import { EventComponent } from './event/event.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { ParticipantComponent } from './participant/participant.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     LoadingComponent,
     HomeComponent,
     HeaderComponent,
-    EventComponent
+    EventComponent,
+    ParticipantComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     MatDatepickerModule,
     MatNativeDateModule,
     MatListModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatExpansionModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
@@ -52,8 +55,7 @@ import { AuthInterceptor } from './auth/auth-interceptor';
   bootstrap: [AppComponent],
   entryComponents: [
     AuthNickNameComponent,
-    LoadingComponent,
-    EventComponent
+    LoadingComponent
   ]
 })
 export class AppModule { }
