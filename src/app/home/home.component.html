@@ -1,4 +1,21 @@
 <app-header></app-header>
+<mat-list>
+  <h3 mat-subheader>Events</h3>
+  <mat-divider></mat-divider>
+  <mat-list-item *ngFor="let event of myEventsCreated$ | async">
+    <h3 matLine>{{ event.title }}</h3>
+    <p matLine>
+      <span> {{ event.place }} </span>
+      <span class="demo-2"> -- {{ event.date | date }} </span>
+    </p>
+    <mat-icon [matBadge]="event.numPeople" matBadgeColor="warn"
+    >person</mat-icon
+    >
+    <span class="cdk-visually-hidden"> </span>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-list>
+
 <button class="addNewEvent" mat-mini-fab (click)="onNewEvent()">
-    <mat-icon>add</mat-icon>
-  </button>
+  <mat-icon>add</mat-icon>
+</button>

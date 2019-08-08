@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { EventService } from './event.service';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-event',
@@ -10,7 +11,7 @@ import { EventService } from './event.service';
 export class EventComponent implements OnInit {
 
   form: FormGroup;
-  constructor(private eventService: EventService) { }
+  constructor(public dialog: MatDialogRef<EventComponent>, private eventService: EventService) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -21,11 +22,15 @@ export class EventComponent implements OnInit {
     });
   }
   onSave() {
-    console.log(this.form);
-    this.eventService.save(this.form.value.title, this.form.value.palce, this.form.value.date, this.form.value.numPeople);
+    const eventDataToSave = this.form.getRawValue();
+    console.log(eventDataToSave);
+    this.eventService.save(eventDataToSave.title, eventDataToSave.place, eventDataToSave.date, eventDataToSave.numPeople)
+    .subscribe( () => {
+      this.dialog.close();
+    });
   }
   onCancel() {
-
+      this.dialog.close();
   }
 
 
